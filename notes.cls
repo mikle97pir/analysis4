@@ -39,6 +39,7 @@
 \newtheorem{de}{Определение}
 \newtheorem{lm}{Лемма}
 \newtheorem{exm}{Пример}
+\newtheorem{exc}{Упражнение}
 \newtheorem{cor}{Следствие}
 \newtheorem{st}{Утверждение}
 \theoremstyle{remark}
