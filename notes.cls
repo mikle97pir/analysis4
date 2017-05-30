@@ -2,7 +2,7 @@
 \ProvidesClass{notes}
 
 \LoadClass
-		[10pt,a4paper, oneside]{report}
+		[10pt,a4paper, oneside]{book}
 
 \RequirePackage{fontspec}
 \RequirePackage[english, russian]{babel}
