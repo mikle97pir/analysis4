@@ -12,6 +12,7 @@
 \setsansfont{Futura PT Light}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
+\RequirePackage{mathtools} % чтобы делать скобки снизу без пробелов \mathclap
 \RequirePackage{amsthm}
 \RequirePackage{wasysym}
 \RequirePackage{chngcntr}
@@ -39,6 +40,7 @@
 \newtheorem{de}{Определение}
 \newtheorem{lm}{Лемма}
 \newtheorem{exm}{Пример}
+\newtheorem{pr}{Свойство}
 \newtheorem{exc}{Упражнение}
 \newtheorem{cor}{Следствие}
 \newtheorem{st}{Утверждение}
@@ -89,6 +91,7 @@
 \counterwithin{lm}{section}
 \counterwithin{st}{section}
 \counterwithin{exm}{section}
+\counterwithin{pr}{section}
 \counterwithin{rem}{section}
 \counterwithout{section}{chapter}
 \renewcommand{\thethm}{\arabic{section}.\arabic{thm}}
@@ -97,6 +100,8 @@
 \renewcommand{\thest}{\arabic{section}.\arabic{st}}
 \renewcommand{\theexm}{\arabic{section}.\arabic{exm}}
 \renewcommand{\therem}{\arabic{section}.\arabic{rem}}
+\renewcommand{\therem}{\arabic{section}.\arabic{pr}}
+
 
 \counterwithin{subsection}{section}
 
