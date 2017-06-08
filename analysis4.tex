@@ -2498,7 +2498,7 @@
 			\]
 			Заметим, что
 			\[
-				\dot{\psi}(s) = f_u \dot{\varphi_1} + f_v \dot{\varphi_2} \so \ddot{\psi}(s) \so \ddot{\psi}(s) = (f_uu \dot{\varphi_1} + f_uv \dot{\varphi_2}) \dot{\varphi_1} + f_u \ddot{\varphi_1} + (f_uv \dot{\varphi_1} + f_vv \dot{\varphi_2}) \dot{\varphi_2} + f_v \ddot{\varphi_2}.
+				\dot{\psi}(s) = f_u \dot{\varphi_1} + f_v \dot{\varphi_2} \so \ddot{\psi}(s) \so \ddot{\psi}(s) = (f_{uu} \dot{\varphi_1} + f_{uv} \dot{\varphi_2}) \dot{\varphi_1} + f_u \ddot{\varphi_1} + (f_{uv} \dot{\varphi_1} + f_{vv} \dot{\varphi_2}) \dot{\varphi_2} + f_v \ddot{\varphi_2}.
 			\]
 			Умножая на $n,$ получим, что
 			\[
@@ -2548,7 +2548,7 @@
 \section{Полная (гауссова) кривизна. Теорема Гаусса.}
 
 	\begin{de}
-		\ti{Гауссова кривизна} кривой в точке~--- произведение главных кривизн.
+		\ti{Гауссова кривизна} кривой в точке~--- произведение главных кривизн, обозначается $K$.
 	\end{de}
 
 	\begin{de}
@@ -2573,20 +2573,27 @@
 		\[
 			\nu = \nu_{\tau} + \nu_n.
 		\]
-		\ti{Геодезической кривизной} кривой называется $|\nu_{\tau}|$.
+		\ti{Геодезической кривизной} кривой называется $|\nu_{\tau}| = \varkappa$.
  		При этом $|\nu_n|$~--- нормальная кривизна.
- 		Так же кривизна проекции кривой на касательную плоскость равна геодезической кривизне.
+ 		Также кривизна проекции кривой на касательную плоскость равна геодезической кривизне.
 	\end{de}
 
 	\begin{st}
 		\[
-			k_g = \dfrac{|(\varphi''(t_0), \, \varphi'(t_0), \, n)|}{|\varphi'(t_0)|^3}.
+			\varkappa = \dfrac{|(\varphi''(t_0), \, \varphi'(t_0), \, n)|}{|\varphi'(t_0)|^3}.
 		\]
 	\end{st}
 
 	\begin{de}
 		\ti{Геодезическими кривыми} называются кривые на поверхности, геодезические кривизны которых равны нулю.x
 	\end{de}
+
+	\begin{thm}[Гаусса-Бонне]
+		Пусть $M$~--- гладкая поверхность, $P = p_1...p_k$~--- криволинейный многогранник, $p_ip_{i+1} = \gamma_i$~--- сторона. Тогда
+		\[
+			\sum_i \alpha_i + \sum_i \int\limits_{\gamma_i} \varkappa \D s = 2 \pi - \int\limits_P K \D S.
+		\]
+	\end{thm}
 
 \chapter{Теория поля}
 
@@ -2889,6 +2896,367 @@
 \section{Примеры полей с различными свойствами. Центральное несжимаемое поле.}
 
 	Посмотреть в \href{http://www.math.spbu.ru/analysis/tutorial/vecfi.pdf}{пособии}.
+
+\chapter{Анализ Фурье}
+
+\section{Гильбертово пространство. Пространство $\mc{L}_2$.}
+
+	\begin{de}
+		Пусть $L$~--- линейное пространство над $\K = \R(\C)$ и в нём задано \ti{скалярное произведение}~--- отображение $\cdot\col \; L \times L \to \K,$ удовлетворяющее следующим аксиомам:
+		\begin{enumerate}
+			\item $(y, \, x) = (x, \, y),$ если $\K = \R,$ или $(y, \, x) = \ov{(x, \, y)},$ если $\K = \C$.
+			\item $(x, \, y + z)$ = $(x, \, y) + (x, \, z)$.
+			\item $(\lambda x, \, y) = \lambda(x, \, y)$.
+			\item $(x, \, x) = 0 \eqv x = 0$.
+		\end{enumerate}
+		Тогда $L$ называют \ti{гильбертовым пространством}.
+	\end{de}
+
+	\begin{de}
+		Пусть $(X, \, \mu)$~--- пространство с мерой. Тогда $\mc{L}^2_{\mu}$~--- пространство, состоящее из всех измеримых функций из $X$ в $\C$ таких, что
+		\[
+			\int\limits_{X} |f|^2 \D \mu < \infty.
+		\]
+		На нём вводится скалярное произведение
+		\[
+			f \cdot g = \int\limits_{X} f \ov{g} \D \mu.
+		\]
+	\end{de}
+
+	\begin{rem}
+		Строго говоря, это не гильбертово, а \ti{предгильбертово} пространство, т.к.
+		\[
+			\|f\| = \sqrt{\int\limits_{X} |f|^2 \D \mu}
+		\]
+		обращается в ноль, если $f$ равна нулю почти везде, а не только если $f = 0$. Это можно исправить, если отождествить функции, разность которых имеет меру ноль. Пространство классов эквивалентности обозначают $L^2_{\mu}(X)$. На практике это не очень важно.
+	\end{rem}
+
+	\begin{st}
+		Пространство $\mc{L}$ является \ti{полным}.
+	\end{st}
+
+	\begin{st}
+		Если $f_n \to f,$ то $f_n \cdot g \to f \cdot g$.
+		\begin{proof}
+			\[
+				|f_n \cdot g - f \cdot g| = |(f_n - f) \cdot g| \leqslant \|f_n - f\| \, \|g\| \to 0.
+			\]
+		\end{proof}
+	\end{st}
+
+\section{Ортогональные ряды в гильбертовом пространстве. Теорема Пифагора. Ряд Фурье в гильбертовом пространстве.}
+
+	\begin{de}
+		Векторы $f$ и $g$ называют \ti{ортогональными}, если $f \cdot g = 0$.
+	\end{de}
+
+	\begin{thm}[Пифагора]
+		Пусть функции $f_i$ попарно ортогональны, причём ряд
+		\[
+			\sum\limits_i f_i \text{ сходится.}
+		\]
+		Тогда
+		\[
+			\left\|\sum\limits_i f_i\right\|^2 = \sum\limits_{i} \|f_i\|^2.
+		\]
+		\begin{proof}
+			Рассмотрим конечную сумму:
+			\[
+				\left\|\sum\limits_{i = 1}^n f_i\right\|^2 = \sum\limits_{i = 1}^n f_i \cdot \sum\limits_{i = 1}^n f_i = \sum\limits_{i = 1}^n \|f_i\|^2,
+			\]
+			т.к. остальные члены занулятся из-за ортогональности. Если перейти к пределу, получится искомое равенство.
+		\end{proof}
+	\end{thm}
+
+	\begin{de}
+		$\{e_i\}$ называется \ti{ортогональной системой,} если все вектора попарно ортогональны и не равны нулю. И \ti{ортонормированной,} если ещё и единичны.
+	\end{de}
+
+	Понятно, что ортогональная система является линейно независимой.
+
+	\begin{st}
+		Пусть $\{e_k\}$~--- ортогональная система. Тогда выражение
+		\[
+			\left\| f - \sum\limits_{k} a_k e_k\right\|
+		\]
+		достигает минимума тогда и только тогда, когда
+		\[
+			a_k = c_k(f) = \dfrac{f \cdot e_k}{\|e_k\|^2}.
+		\]
+		\begin{proof}
+			Это классический геометрический результат, его и получить несложно.
+		\end{proof}
+	\end{st}
+
+	Из доказательства в частности следует
+	\begin{st}[Неравенство Бесселя]
+		\[
+			\sum\limits_{k = 1}^n |c_k(f)|^2 \|e_k\|^2 \leqslant \|f\|^2.
+		\]
+	\end{st}
+
+	\begin{de}
+		Пусть $\{e_n\}_{n \in \N}$~--- ортогональная система, $f \in \mc{L}^2$. Тогда $c_n(f)$ называются \ti{коэффициентами Фурье,} а ряд
+		\[
+			\sum\limits_{k = 1}^{\infty} c_n e_n
+		\]
+		называется \ti{рядом Фурье}.
+	\end{de}
+
+	\begin{de}
+		Ортогональная система называется \ti{базисом,} если любая функция из $\mc{L}^2$ почти везде совпадает со своим рядом Фурье.
+	\end{de}
+
+\section{Классические ряды Фурье по тригонометрической и экспоненциальной схеме}
+
+	Пусть $\mc{L} = \mc{L}_{2 \pi}^2$.
+
+	\begin{de}
+		Система функций
+		\[
+			1, \; \cos x, \; \sin x, \; \cos 2 x, \; \sin 2 x,...
+		\]
+		называется \ti{тригонометрической,} а система
+		\[
+			..., \; e^{-2ix}, \; e^{-ix}, \; 1, \; e^{ix}, \; e^{2ix},...
+		\]
+		называется \ti{экспоненциальной}.
+	\end{de}
+
+	\begin{st}
+		Тригонометрическая и экспоненциальная система являются ортогональными.
+	\end{st}
+
+	\begin{st}
+		Ряд Фурье для $f$ по тригонометрической системе имеет вид
+		\[
+			\dfrac{a_0}{2} + \sum\limits_{k = 1}^{\infty} (a_k \cos k x + b_k \sin k x),
+		\]
+		где
+		\[
+			a_0 = \dfrac{1}{\pi} \dfrac{}{} \int\limits_{0}^{2\pi} f(x) \D x, \; a_k = \dfrac{1}{\pi} \int\limits_{0}^{2\pi} f(x) \cos k x \D x, \; a_k = \dfrac{1}{\pi} \int\limits_{0}^{2\pi} f(x) \sin k x \D x.
+		\]
+	\end{st}
+
+	\begin{st}
+		Ряд Фурье по экспоненциальной системе имеет вид
+		\[
+			\sum\limits_{k = -\infty}^{\infty} c_k e^{ikx},
+		\]
+		где
+		\[
+			c_k = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} f(x) e^{ikx} \D x.
+		\]
+	\end{st}
+
+\section{Ядро Дирихле. Лемма Римана-Лебега.}
+
+	\begin{rem}
+		Хочется заметить, что т.к.
+		\[
+			c_k e^{ikx} + c_{-k} e^{-ikx} = (c_k + c_{-k}) \cos kx + i(c_k - c_{-k}) \sin kx,
+		\]
+		между двумя системами есть связь:
+		\[
+			a_k = c_k + c_{-k} \text{ и } b_k = i(c_k - c_{-k}).
+		\]
+		Поэтому логично понимать сходимость для ряда Фурье в экспоненциальной системе сходимость симметричных комбинаций, в смысле главного значения. Тогда она будет эквивалентна сходимости в тригонометрической системе.
+	\end{rem}
+
+	\begin{de}
+		\ti{Ядром Дирихле} называют функцию
+		\[
+			D_n(x) = \sum\limits_{k = -n}^n e^{ikx}. 
+		\]
+	\end{de}
+
+	\begin{st}
+		$\hphantom{.}$
+		\begin{enumerate}
+			\item \[
+				D_n(x) = \dfrac{\sin\left(n + \tfrac{1}{2}\right)x}{\sin\tfrac{x}{2}}.
+			\]
+			\item $D_n$ имеет период $2 \pi$.
+			\item $D_n(-x) = D_n(x)$.
+			\item 
+			\[
+				\int\limits_{a}^{a + 2\pi} D_n(x) = 2\pi.
+			\]
+			\begin{proof}
+				Руками.
+			\end{proof}
+		\end{enumerate}
+	\end{st}
+
+	\begin{de}
+		\ti{Ядро Фейера}~--- функция
+		\[
+			F_n(x) = \dfrac{1}{n} \sum\limits_{k = 0}^{n - 1} D_k(x).
+		\]
+	\end{de}
+
+	\begin{st}
+		$\hphantom{.}$
+		\begin{enumerate}
+			\item \[
+				F_n(x) = \dfrac{1}{n} \dfrac{\sin^2\left(\tfrac{nx}{2}\right)}{\sin^2\left(\tfrac{x}{2}\right)}. 
+			\]
+			\item $F_n$ чётная.
+			\item $F_n$ имеет период $2\pi$.
+			\item 
+			\[
+				\int\limits_{-\pi}^{\pi} F_n(x) \D x = 2\pi.
+			\]
+		\end{enumerate}
+		\begin{proof}
+			Тоже руками.
+		\end{proof}
+	\end{st}
+
+	\begin{lm}[Римана-Лебега]
+		Пусть $f \in L(\R)$. Тогда
+		\[
+			\int\limits_{\R} f(x) \sin(nx) \D x, \; \int\limits_{\R} f(x) \cos(nx) \D x, \; \int\limits_{\R} f(x) e^{inx} \D x \xrightarrow{n \to \infty} 0.
+		\]
+		\begin{proof}
+			\begin{enumerate}
+				\item Если функция имеет вид $f = \mc{1}_{[a, \, b],}$ то это проверяется руками. Для индикатора другого множества (ограниченного) можно вписать его в отрезок и прижать.
+				\item Значит и для простых функций работает.
+				\item Для произвольной функции нужно лишь приблизить её близкой простой.
+			\end{enumerate}
+		\end{proof}
+	\end{lm}
+
+\section{Теорема Дини о поточечной сходимости и следствия из неё.}
+
+	\begin{thm}
+		Пусть $f \in \mc{L}^1_{2\pi}, \; x \in \R,$ и в точке $x$ функция удовлетворяет \ti{условию Дини:}
+		\[
+			u(t) = \dfrac{f(x + t) - f(x - t)}{t} - \dfrac{2 L}{t}\scol \; \int\limits_{0}^{\pi} u(t) \D t < \infty.
+		\]
+		\begin{proof}
+			\begin{align*}
+				s_n(x) &= \sum\limits_{k = -n}^{n} c_k e^{ikx} = \sum\limits_k \dfrac{1}{2\pi} \int\limits_{-\pi}^{\pi} f(t) e^{ikt} \D t \, e^{ikx} = \dfrac{1}{2\pi} \int\limits_{-\pi}^{\pi} f(t) \sum\limits_k e^{ik(x - t)} \D t = \dfrac{1}{2\pi}\int\limits_{-\pi}^{\pi} f(x - u) D_n(u)\D u = \\ &=\dfrac{1}{2\pi}\int\limits_{0}^{2\pi} \big(f(x + u) + f(x - u)\big) D_n(u) \D u. 
+			\end{align*}
+  			При этом
+ 			\[
+ 				L = \dfrac{1}{2\pi} \int\limits_{-\pi}^{\pi} 2L D_n(u) \D u,
+ 			\]
+ 			поэтому
+ 			\[
+ 				s_n(x) - L = \dfrac{1}{2\pi}\int\limits_{0}^{2\pi} \big(f(x + u) + f(x - u) - 2 L\big) \dfrac{\sin\left(n + \tfrac{1}{2}\right)u}{\sin\tfrac{u}{2}} \D u = \dfrac{1}{2\pi} \int\limits_{0}^{2\pi} g_x(u) \sin\left(n + \tfrac{1}{2}\right)u \D u,
+ 			\]
+ 			где
+ 			\[
+ 				g_x(u) = \big(f(x + u) + f(x - u) - 2 L\big) \dfrac{1}{\sin\tfrac{u}{2}}.
+ 			\]
+ 			Можно подобрать такую $C,$ что
+ 			\[
+ 				|g_x(u)| \leqslant \dfrac{C}{u} |f(x + u) + f(x - u) - 2 L|
+ 			\]
+ 			Отсюда следует суммируемость $g,$ а тогда наш интеграл стремится к нулю по лемме Римана-Лебега.
+ 		\end{proof}
+	\end{thm}
+
+	\begin{cor}
+		Если существуют конечные $f(x - 0), \, f(x + 0), \, f'_{+}(x), \, m f'_{-}(x),$ то $f$ удовлетворяет условию Дини с $L = \dfrac{1}{2} (f(x - 0) + f(x + 0))$.
+		\begin{proof}
+			Я пока не совсем понял, хотя для непрерывной $f$ это вроде понятно.
+		\end{proof}
+	\end{cor}
+
+\section{Свойства коэффициентов Фурье}
+	
+	\begin{st}
+		Пусть $\hat{f}(n)$~--- соответствующий коэффициент Фурье. Если $f \in L^1_{2\pi},$ то $\hat{f}(n) \xrightarrow{n \to \infty} 0.$
+		\begin{proof}
+			Это следует из теоремы Римана-Лебега, если записать выражение для коэффициента.
+		\end{proof}
+	\end{st}
+
+	\begin{st}
+		Пусть $\hat{f}(n)$~--- соответствующий коэффициент Фурье. Если $f' \in L^1_{2\pi},$ то $\hat{f}'(n) = in \hat{f}(n)$ $\hat{f}(n) = o(\tfrac{1}{n}).$
+		\begin{proof}
+			Нужно расписать по частям.
+		\end{proof}
+	\end{st}
+
+	Аналогичное утверждение формулируется для $f^{(p)}$.
+
+	\begin{st}
+		Пусть $c_n = o(\tfrac{1}{n^{p + 2}}),$ тогда есть $\varphi \in C_{2\pi}^p$ такая, что $\varphi = f$ почти везде, и $c_n = \hat{f}(n) = \hat{\varphi}(n)$.
+		\begin{proof}
+			$\varphi$ определяется, как сумма ряда.
+		\end{proof}
+	\end{st}
+
+\section{Формулировки результатов о сходимости рядов Фурье (включая теорема Фейера).}
+
+
+	\begin{thm}
+		$\hphantom{.}$
+		\begin{enumerate}
+			\item $f$ суммируема $\so$ коэффициенты ряда определены.
+			\item $f$ имеет конечную норму $\so$ ряд Фурье сходится к функции по норме.
+			\item $f$ гладкая $\so$ $c_n$ убывают быстро, и наоборот.
+			\item $f$ суммируема $\so$ $\all \Delta \in [-\pi, \, \pi]\col$
+			\[
+				\int\limits_{\Delta} f(x) \D x = \mr{V. P.} \sum\limits_{k = -n}^{n} c_k \int\limits_{\Delta} e^{ikx} \D x.
+			\]
+			\item Теорема Дини.
+			\item Если $f$ непрерывна, то $\|f - \sigma_n\|_{\infty} = \max\limits_{x \in \R}|f(x) - \sigma_n(x)| \to 0,$ где $\sigma_n = \dfrac{S_n}{n}$. Эта сходимость называется \ti{сходимость по Чезаро}, а признак~--- теорема Фейера.
+		\end{enumerate}
+	\end{thm}
+
+\section{Преобразование Фурье и его свойства. Интегральная формула Фурье.}
+
+	\begin{de}
+		Пусть $f$ суммируема на $\R,$ тогда
+		\[
+			\hat{f}(t) = \dfrac{1}{2\pi}\int\limits_{-\infty}^{+\infty} f(x) e^{itx} \D x \text{~--- преобразование Фурье.}
+		\]
+	\end{de}
+
+	\begin{pr}
+		$|\hat{f}(s)| \leqslant \dfrac{1}{2\pi}\|f\|_1$.
+	\end{pr}
+
+	\begin{pr}
+		$\hat{f}$ непрерывна, если $f$ суммируема.
+		\begin{proof}
+			Теорема о мажорированной сходимости.
+		\end{proof}
+	\end{pr}
+
+	\begin{pr}
+		Если $g(x) = x^n f(x)$ и $g$ суммируема, то $\hat{f} \in C^n$.
+		\begin{proof}
+			Нужно внести производную под интеграл и увидеть, что интеграл будет равномерно сходиться.
+		\end{proof}
+	\end{pr}
+
+	\begin{pr}
+		Аналогичные рядам свойства про скорость убывания.
+	\end{pr}
+
+	\begin{pr}
+		$g(x) = f(x - a) \so \hat{g}(s) = e^{-isa} \hat{f}(s)$.
+	\end{pr}
+
+	\begin{pr}
+		$\hat{f * g}(s) = 2 \pi \hat{f} * \hat{g}$.
+	\end{pr}
+
+	\begin{pr}
+		Обратное преобразование Фурье: если $f \col \; \R \to \C$ измерима, то
+		\[
+			\hat{f}(x) = \mr{V. P.} \int\limits_{-\infty}^{\infty} f(s)e^{isx} \D s.
+		\]
+		Оно работает, когда выполняется условие Дини.
+	\end{pr}
+
+
+	
 \end{document}
 
  
